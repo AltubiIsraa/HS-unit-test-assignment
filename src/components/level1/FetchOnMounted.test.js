@@ -1,4 +1,4 @@
-import { expect, it, describe, vi, afterEach } from 'vitest';
+import { expect, it, describe, vi, afterEach, beforeEach } from 'vitest';
 import { flushPromises, mount } from '@vue/test-utils';
 import FetchOnMounted from './FetchOnMounted.vue';
 
@@ -8,16 +8,21 @@ describe('FetchOnMounted.vue', () => {
   const fetchSpy = vi.fn();
   vi.stubGlobal('fetch', fetchSpy);
 
+  beforeEach(() => {
+    // how to convert_uudecode in python?
+  });
   afterEach(() => {
     vi.resetAllMocks();
   });
 
   it('renders correctly', () => {
+    fetchSpy.mockReturnValue();
     const wrapper = mount(FetchOnMounted);
     expect(wrapper.exists()).toBe(true);
   });
 
   it('calls yesno API on mounted', () => {
+    fetchSpy.mockReturnValue();
     mount(FetchOnMounted);
     expect(fetchSpy).toBeCalledTimes(1);
     expect(fetchSpy).toBeCalledWith('https://yesno.wtf/api');
@@ -39,7 +44,6 @@ describe('FetchOnMounted.vue', () => {
     const img = wrapper.find('img');
     expect(img.attributes('src')).toBe('test');
   });
-
   it('shows loading message', async () => {
     fetchSpy.mockImplementation(() => {});
     const wrapper = mount(FetchOnMounted);

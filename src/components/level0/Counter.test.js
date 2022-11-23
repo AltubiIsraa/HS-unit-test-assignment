@@ -2,17 +2,17 @@ import { mount } from '@vue/test-utils';
 import { expect, test } from 'vitest';
 import Counter from './Counter.vue';
 
-test('increments value on click (NOT GREAT TEST)', async () => {
-  const wrapper = mount(Counter);
-  const paragraph = wrapper.find('.paragraph');
+// test('increments value on click (NOT GREAT TEST)', async () => {
+//   const wrapper = mount(Counter);
+//   const paragraph = wrapper.find('.paragraph');
 
-  expect(paragraph.text()).toBe('Times clicked: 0');
+//   expect(paragraph.text()).toBe('Times clicked: 0');
 
-  await wrapper.vm.increment();
-  await wrapper.vm.increment();
+//   await wrapper.vm.increment();
+//   await wrapper.vm.increment();
 
-  expect(paragraph.text()).toBe('Times clicked: 2');
-});
+//   expect(paragraph.text()).toBe('Times clicked: 2');
+// });
 
 /**
  *

@@ -1,7 +1,8 @@
-import { expect, it, describe } from 'vitest';
+import { expect, it, describe, vi } from 'vitest';
 import { mount, shallowMount } from '@vue/test-utils';
 import MovieList from '../MovieList.vue';
 import MovieCard from '../MovieCard.vue';
+import dataService from '../utils/dataService';
 
 describe('MovieList.vue', () => {
   it('renders correctly', () => {
@@ -13,16 +14,20 @@ describe('MovieList.vue', () => {
   // TODO: Why is this a bad test? Reason your answer
   // TODO: Rework the test so it follows best practices
   it('should render movie list', async () => {
+    const mockedMovieList = [{}, {}];
+    const spy = vi
+      .spyOn(dataService, 'getMovies')
+      .mockReturnValue(mockedMovieList);
     const wrapper = shallowMount(MovieList);
     const movieCards = wrapper.findAllComponents(MovieCard);
-
-    expect(movieCards.length).toBe(4);
+    expect(spy).toBeCalledTimes(1);
+    expect(movieCards.length).toBe(mockedMovieList.length);
   });
 
   // TODO: write this test!
   it('should have no favorite movie by default', async () => {
     const wrapper = shallowMount(MovieList);
-    // ...?
+    // find selector
   });
 
   // TODO: TDD time!
